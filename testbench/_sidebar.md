@@ -6,5 +6,5 @@
 * [Convert SAPI Excel to Config File](testbench/Convert%20SAPI%20Excel%20to%20Config%20File.md)
 * [ABDaemon Issue Summary](testbench/ABDaemon%20Issue%20Summary.md)
 * [Aeolus  Mic Calibration Tool](testbench/Aeolus%20%20Mic%20Calibration%20Tool.md)
-
+* [How to setup Firefly MCU FW Dev Env](/testbench/How%20to%20setup%20Firefly%20MCU%20FW%20Dev%20Env.md)
 * [**🏠主目录**](/README.md)
