@@ -2,11 +2,11 @@
 
 *Released by* [`Fortemedia`](https://www.fortemedia.com/ "Listen and sound better. Anywhere!") `SQA Tool Team` <a href="mailto:qiangp@fortemedia.com" title="Email the developer">📫</a>
 
-## Overview
+## 1. Overview
 
 The single API file (*SAPI*) from SW team is excel formated(*"\*.xlsx"*), which need to be converted to SAPI config file format(*"\*.json"*) for Unified Tuner use purpose.
 
-## How to Convert
+## 2. How to Convert
 
 #### Step 1
 
@@ -26,7 +26,7 @@ The single API file (*SAPI*) from SW team is excel formated(*"\*.xlsx"*), which 
 *   Put config files to the "./API/SAPI/`a.b.c`/" of Unified Tuner
 *   The `a.b.c` is the SAPI version number
 
-## Error FAQ
+## 3. Error FAQ
 
 The parser might hit some error during converting, usually caused by illegal format or typo in the *"\*.xlsx"* file. Such as:
 

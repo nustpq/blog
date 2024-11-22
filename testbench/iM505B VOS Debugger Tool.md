@@ -1,7 +1,7 @@
 # iM505B VOS Debugger Tool (readme)
 *Released by* [`Fortemedia`](https://www.fortemedia.com/ "Listen and sound better. Anywhere!") `SQA Tool Team`<a href="mailto:qiangp@fortemedia.com" title="Email the developer">📫</a>
 
-## Overview
+## 1. Overview
 
 *   This tool is for iM505B hardware and VOS software developing and testing purpose based on FAB02 with iM505B EVM platform.
 *   The latest update are released on Fortemedia Sharepoint : [VOS Debugger Tool](https://fortemediainc.sharepoint.com/\:f:/s/live_doc/products/Es-PAok8U21PqvLyUOIDTVABewVWI4Mnd_arzARIQlww4Q?e=vlkvkN "Click here to download")
@@ -10,7 +10,7 @@
     *   Server (*ABServer*) is released and maintained by the Tool Team.
     *   Client (*TestCase*) scripts are written in Lua language.
 
-## Working Directory
+## 2. Working Directory
 
 *   **./Configuration** : Debug data configration for *VOSDebugger.exe*.
 *   **./doc** : Test script API reference document.
@@ -22,7 +22,7 @@
 *   **./Vector** : Included some test vector wave files.
 *   **./WaveViewer** : Realtime waveform displayer tool.
 
-## How To Start
+## 3. How To Start
 
 *   All test cases are located in directory `./TestCase/`, in which each subfolder is a testcase and subfolder name is the testcase name
 *   Test case to run is defined by the variable `"TEST_CASE_NAME"` in `./TestCase/run_test.lua`
@@ -33,12 +33,12 @@
 *   Test client log file (*Test\_Log.log*) is under test case folder
 *   Server log file (*ABServer\_Log.log*) is located in `"C:/Users/*USERNAME*/appdata/Local/ABServer/"`
 
-## User Programming API Reference
+## 4. User Programming API Reference
 
 *   iM505B DSP and FAB02 platform related hardware basic operation functions are provided in this release tool for user's programming own test cases.
 *   User can refer to source code in `"./Noah/lua/"` or the document [API Reference](./doc/api_ref_manual.html "a user programming API manual")
 
-## Note
+## 5. Note
 
 *   The ABServer terminal windows is hiden by default, show it by setting `"SHOW_VM_CONSOLE = 1"` in file `"./Server/ABServer/LaoMuJiVC.ini"`
 *   A left click on test terminal will pause the running script, and press `'Enter'` key can resume test.

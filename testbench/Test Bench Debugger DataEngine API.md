@@ -1,38 +1,38 @@
-# TestBench Debugger DataEngine(ABDengine) APIs
+# TestBench Debugger DataEngine(ABDEngine) APIs
 
-#### python lib 接口说明
+TestBench debugger使用的ABDEngine库 python版本接口说明
 
-## 名称
+## 1. 引用模块
 
 模块名称为: `abdengine`
-
+```python
     import abdengine
-
-## 对象
+```
+## 2. 创建对象
 
 一个对象对应一次录音的case。
 对象主要用来管理case的属性数据，比如channel数目、sample rate、debug信息等等。内部还维护文件列表、搜索缓存等数据。
-
+```python
     wav = abdengine.open('case name')
     wav = abdengine.create('case name')
-
+```
 `case name`是case文件的名字，实际是一个sqlite文件。
 `open`用来打开一个已经存在的case；`create`用来打开一个新的case，用于录音。
 
-## 属性
+## 3. 参数属性
 
-| 属性              | 说明              |
+| 属性             | 说明              |
 | --------------- | --------------- |
 | `sample_rate`   | 采样率             |
 | `sample_bits`   | 采样位宽            |
 | `voice_channel` | 语音通道数           |
 | `debug_frame`   | debug信息帧长(采样点数) |
 
-## 数据类型
+## 4. 数据类型
 
 获取的数据类型，具体是哪种，请UI开发者来定义。
 
-## Debug信号ID定义
+## 5. Debug信号ID定义
 
 每个debug信号都对应有个唯一的ID，用于定位该debug信号在DICT表格中的位置，包含其所在的页编号page id和偏移量offset信息。定义如下：
 
@@ -40,9 +40,9 @@
 
 如`DSP current MIPS `的ID就是0x00010010（65552）
 
-## 方法
+## 6. 方法
 
-#### wav.setrecinfo( sample\_rate, sample\_bits, voice\_channel\_num, dbg\_channel\_num, dbg\_frame\_len )
+### 6.1 <font color=Green>wav.setrecinfo</font>(sample\_rate, sample\_bits, voice\_channel\_num, dbg\_channel\_num, dbg\_frame\_len)
 
 *   `setrecinfo`用来设置case录音的信息，
 *   `sample_rate`是采样率，
@@ -51,12 +51,12 @@
 *   `dbg_channel_num`为debug通道数目，总通道数为语音通道数+debug通道数，debug通道必须位于语音通道之后，
 *   `dbg_frame_len`指定一个debug帧相当于语音帧的多少sample。用open打开的wav对象调用此方法无效。
 
-#### wav.feed(data,sample\_num)
+### 6.2 <font color=Green>wav.feed</font>(data,sample\_num)
 
 *   `feed`用来向对象中写入数据，
 *   `data`中的数据必须是完整的语音帧。用open打开的wav对象调用此方法无效。
 
-#### wave = wav.getvoicedata(zoom\_level, channel, start, \[end])
+### 6.3 <font color=Green>wave = wav.getvoicedata</font>(zoom\_level, channel, start, \[end])
 
 *   `getvoicedata`用来获取某个channel的音频数据，
 *   `channel`是channel号，
@@ -64,7 +64,7 @@
 *   `start`标志起始sample,
 *   `end`标识结束sample，如果省略`end`代表读取到最后。
 
-#### debug = wav.getdebugdata(zoom\_level, debug\_id, start, \[end])
+### 6.4 <font color=Green>debug = wav.getdebugdata</font>(zoom\_level, debug\_id, start, \[end])
 
 *   `getdebugdata`用来获取某个debug数据，
 *   `zoom_level`用来指定是哪个缩放级别的数据，
@@ -72,7 +72,7 @@
 *   `start`标志起始帧,
 *   `end`标识结束帧，如果省略`end`代表读取到最后。
 
-#### box\_list = wav.search(debug\_id, op, value, \[start, end])
+### 6.4 <font color=Green>box\_list = wav.search</font>(debug\_id, op, value, \[start, end])
 
 *   `search`用来按取值区间获取某个debug数据的范围，
 *   `debug_id`是debug数据的ID，
