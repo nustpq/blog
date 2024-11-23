@@ -1,13 +1,12 @@
 
-# **TestBench Online Documents**
+# **Test Bench Online Docs**
 
-*Released by* [`Fortemedia`](https://www.fortemedia.com/ "Listen and sound better. Anywhere!") `SQA Tool Team` <a href="mailto:qiangp@fortemedia.com" title="Email the developer">📫</a>
+This is a help documents for Test Bench tools usage and release.
 
+## [**👉 进入目录**](/README.md)
 
+<br><br><br>
+<!-- background image -->
+![](assets/img/bg.jpg)
 
-This is a help documents for Testbench tools usage and release.
-
-
-## [**🏠主目录**](/README.md)
-
-
+* *Released by* [`Fortemedia`](https://www.fortemedia.com/ "Listen and sound better. Anywhere!") `SQA Tool Team` <a href="mailto:qiangp@fortemedia.com" title="Email the developer">📫</a>  :+1:

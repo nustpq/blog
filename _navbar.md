@@ -8,7 +8,8 @@
   - [HRCloud](https://corehr.hrcloud.com/#/Dashboard)
   - [Bitbucket](https://bitbucket.org/dashboard/repositories)
   - [Github](https://github.com/)
-  - [How-to-Use-Docsify](https://www.cnblogs.com/xhemj/p/How-to-Use-Docsify.html)
+  - [Docsify](https://docsify.js.org/#/?id=docsify)
+  - [How to Use Docsify](https://www.cnblogs.com/xhemj/p/How-to-Use-Docsify.html)
   - 
 
 - **About**

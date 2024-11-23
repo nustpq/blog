@@ -1,4 +1,4 @@
-* [**🌏Home**](/)
+* [**Home**](/)
 * [SAB03 Firmware by JTAG](testbench/SAB03%20Firmware%20by%20JTAG.md)
 * [FAB02 Firmware Update by SAM-BA](testbench/FAB02%20Firmware%20Update%20by%20SAM-BA.md)
 * [iM505B VOS Debugger Tool](testbench/iM505B%20VOS%20Debugger%20Tool.md)
@@ -7,4 +7,4 @@
 * [ABDaemon Issue Summary](testbench/ABDaemon%20Issue%20Summary.md)
 * [Aeolus  Mic Calibration Tool](testbench/Aeolus%20%20Mic%20Calibration%20Tool.md)
 * [How to setup Firefly MCU FW Dev Env](/testbench/How%20to%20setup%20Firefly%20MCU%20FW%20Dev%20Env.md)
-* [**🏠主目录**](/README.md)
+* [**目录**](/README.md)

@@ -1,4 +1,4 @@
-# How to setup Firefly MCU FW Development Envirenment 
+# How to setup Firefly MCU FW Development Environment 
 
 *Released by* [`Fortemedia`](https://www.fortemedia.com/ "Listen and sound better. Anywhere!") `SQA Tool Team` <a href="mailto:qiangp@fortemedia.com" title="Email the developer">📫</a>
 

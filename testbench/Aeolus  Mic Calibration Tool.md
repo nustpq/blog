@@ -25,17 +25,32 @@
 ### 1.3 信号连接说明
 
 *   放音的NE喇叭可以使用SAB03终端自带的声卡（`SPEAKER`音频输出口）输出驱动，也可以使用外接USB声卡来驱动。注意：用于放音的声卡必须要设置为系统<font color="red">默认声卡</font>。
-*   SAB03通用DUT接口连接麦克风模组测试点。信号连接说明如下：<br><center>
-    | Pin | SAB03        | 麦克风模组      |
-    | --- | ------------ | ---------- |
-    | 01  | `FM_SDA`     | `I2C SDA`  |
-    | 02  | `FM_SCL`     | `I2C SCL`  |
-    | 09  | `FM_SPI_SDI` | `I2S TX`   |
-    | 11  | `FM_SPI_CS`  | `I2S FCLK` |
-    | 12  | `FM_SPI_SCL` | `I2S BCLK` |
-    | 15  | `DUT_GPIO3`  | `Reset`    |
-    | 17  | `GND`        | `GND`      |
-</center>
+*   SAB03通用DUT接口连接麦克风模组测试点。信号连接说明如下：
+<!-- 让表格居中显示的风格 -->
+<style>
+.centerpq
+{
+  width: auto;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+<div class="centerpq">
+
+| Pin   |  SAB03     |  麦克风模组  |
+|:---:  | :-------   | :--------- |
+| `01`  | FM_SDA     | I2C SDA    |
+| `02`  | FM_SCL     | I2C SCL    |
+| `09`  | FM_SPI_SDI | I2S TX     |
+| `11`  | FM_SPI_CS  | I2S FCLK   |
+| `12`  | FM_SPI_SCL | I2S BCLK   |
+| `15`  | DUT_GPIO3  | Reset      |
+| `17`  | GND        | GND        |
+    
+</div>
+
 
 ## 2 软件说明
 
