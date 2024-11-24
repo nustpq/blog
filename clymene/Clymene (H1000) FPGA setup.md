@@ -22,5 +22,5 @@ This is a guide on how to setup Clymeme FPGA verification platform based on DE1-
 ## 6. FAB02 UIF接口说明
 <center class="half"><img src="https://note.youdao.com/yws/api/personal/file/WEB150a3361e1db4dc0057aa5c3386d2b92?method=download&shareKey=e62f2b76f7fb646fdf585ca891e0eb9e" width="800" /> </center>
 
-## 7. 时钟源选择AP_PDM_CLK(<font color=Gren>SW3 OFF</font>)时候，需要将<font color=Red> GPIO-0 </font>的 `Pin1-2` 短接
+## 7. 时钟源选择AP_PDM_CLK(**<font color=Green>SW3 OFF</font>**)时候，需要将 GPIO-0 的 **<font color=Green>PIN 1-2</font>** 短接
 <center class="half"><img src="https://note.youdao.com/yws/api/personal/file/WEBc4e07cd817ab258906c8d602b2c1964b?method=download&shareKey=2799309eeef114e520d373df5222492b" width="800" /> </center>

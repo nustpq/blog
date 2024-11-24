@@ -1,5 +1,6 @@
-# iM505B VOS Debugger Tool (readme)
-*Released by* [`Fortemedia`](https://www.fortemedia.com/ "Listen and sound better. Anywhere!") `SQA Tool Team`<a href="mailto:qiangp@fortemedia.com" title="Email the developer">📫</a>
+# iM505B VOS Debugger Tool
+
+*Released by* [`Fortemedia`](https://www.fortemedia.com/ "Listen and sound better. Anywhere!") `SQA Tool Team`<a href="mailto:qiangp@fortemedia.com" title="Email the developer">📫</a> `2022/11/29 09:01`
 
 ## 1. Overview
 

@@ -1,6 +1,6 @@
-# How to Update SAB03 Firmware by JTAG (readme)
+# How to Update SAB03 Firmware by JTAG
 
-*Released by* [`Fortemedia`](https://www.fortemedia.com/ "Listen and sound better. Anywhere!") `SQA Tool Team` <a href="mailto:qiangp@fortemedia.com" title="Email the developer">📫</a>
+*Released by* [`Fortemedia`](https://www.fortemedia.com/ "Listen and sound better. Anywhere!") `SQA Tool Team` <a href="mailto:qiangp@fortemedia.com" title="Email the developer">📫</a> `2022/11/11 14:56`
 
 ## 1. Overview
 

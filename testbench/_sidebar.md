@@ -1,4 +1,4 @@
-* [**Home**](/)
+* [**首页**](/)
 * [SAB03 Firmware by JTAG](testbench/SAB03%20Firmware%20by%20JTAG.md)
 * [FAB02 Firmware Update by SAM-BA](testbench/FAB02%20Firmware%20Update%20by%20SAM-BA.md)
 * [iM505B VOS Debugger Tool](testbench/iM505B%20VOS%20Debugger%20Tool.md)
