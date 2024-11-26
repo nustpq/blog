@@ -46,47 +46,68 @@
 
 ### 6.1 <font color=Green>wav.setrecinfo</font>(sample\_rate, sample\_bits, voice\_channel\_num, dbg\_channel\_num, dbg\_frame\_len)
 
-*   `setrecinfo`用来设置case录音的信息，
-*   `sample_rate`是采样率，
-*   `sample_bits`是采样位数（16/24/32），
-*   `voice_channel_num`为语音通道数目,
-*   `dbg_channel_num`为debug通道数目，总通道数为语音通道数+debug通道数，debug通道必须位于语音通道之后，
-*   `dbg_frame_len`指定一个debug帧相当于语音帧的多少sample。用open打开的wav对象调用此方法无效。
+*   参数：
+    *   `setrecinfo`用来设置case录音的信息，
+    *   `sample_rate`是采样率，
+    *   `sample_bits`是采样位数（16/24/32），
+    *   `voice_channel_num`为语音通道数目,
+    *   `dbg_channel_num`为debug通道数目，总通道数为语音通道数+debug通道数，debug通道必须位于语音通道之后，
+    *   `dbg_frame_len`指定一个debug帧相当于语音帧的多少sample。用open打开的wav对象调用此方法无效。
+*   返回值：
+    *   `true` 执行成功
+    *   `false` 执行失败
 
 ### 6.2 <font color=Green>wav.feed</font>(data,sample\_num)
 
-*   `feed`用来向对象中写入数据，
-*   `data`中的数据必须是完整的语音帧。用open打开的wav对象调用此方法无效。
+*   参数：
+    *   `feed`用来向对象中写入数据，
+    *   `data`中的数据必须是完整的语音帧。用open打开的wav对象调用此方法无效。
+*   返回值：
+    *   `true` 执行成功
+    *   `false` 执行失败
+  
+### 6.3 <font color=Green>wav.getvoicedata</font>(zoom\_level, channel, start, \[end])
 
-### 6.3 <font color=Green>wave = wav.getvoicedata</font>(zoom\_level, channel, start, \[end])
+*   参数：
+    *   `getvoicedata`用来获取某个channel的音频数据，
+    *   `channel`是channel号，
+    *   `zoom_level`用来指定是哪个缩放级别的数据，
+    *   `start`标志起始sample,
+    *   `end`标识结束sample，如果省略`end`代表读取到最后。
+*   返回值：
+    *   `wavedata` 返回的wave数据列表
+    *   `None` 没有找到相应的结果
+  
+### 6.4 <font color=Green>wav.getdebugdata</font>(zoom\_level, debug\_id, start, \[end])
 
-*   `getvoicedata`用来获取某个channel的音频数据，
-*   `channel`是channel号，
-*   `zoom_level`用来指定是哪个缩放级别的数据，
-*   `start`标志起始sample,
-*   `end`标识结束sample，如果省略`end`代表读取到最后。
+*   参数：
+    *   `getdebugdata`用来获取某个debug数据，
+    *   `zoom_level`用来指定是哪个缩放级别的数据，
+    *   `debug_id`指定这个debug数据的ID，
+    *   `start`标志起始帧,
+    *   `end`标识结束帧，如果省略`end`代表读取到最后。
+*   返回值：
+    *   `debugdata` 有数据返回
+        *   `debugdata[0]` 返回的debug数据列表
+        *   `debugdata[1]` 每个数据的宽度(byte)
+    *   `None` 没有找到相应的结果
+  
+### 6.4 <font color=Green>wav.search</font>(debug\_id, op, value, \[start, end])
 
-### 6.4 <font color=Green>debug = wav.getdebugdata</font>(zoom\_level, debug\_id, start, \[end])
-
-*   `getdebugdata`用来获取某个debug数据，
-*   `zoom_level`用来指定是哪个缩放级别的数据，
-*   `debug_id`指定这个debug数据的ID，
-*   `start`标志起始帧,
-*   `end`标识结束帧，如果省略`end`代表读取到最后。
-
-### 6.4 <font color=Green>box\_list = wav.search</font>(debug\_id, op, value, \[start, end])
-
-*   `search`用来按取值区间获取某个debug数据的范围，
-*   `debug_id`是debug数据的ID，
-*   `start`标志起始frame,
-*   `end`标识结束frame。
-*   `op`为**字符串**，标志比较符号，
-    | 比较符号 | 说明   |
-    | ---- | ---- |
-    | `=`  | 等于   |
-    | `>`  | 大于   |
-    | `>=` | 大于等于 |
-    | `<`  | 小于   |
-    | `<=` | 小于等于 |
-*   `value`标记比较数据。
-
+*   参数：
+    *   `search`用来按取值区间获取某个debug数据的范围，
+    *   `debug_id`是debug数据的ID，
+    *   `start`标志起始frame,
+    *   `end`标识结束frame。
+    *   `op`为**字符串**，标志比较符号包含：
+|  比较符号  | 说明   |
+| ---- | ---- |
+| `=`  | 等于   |
+| `>`  | 大于   |
+| `>=` | 大于等于 |
+| `<`  | 小于   |
+| `<=` | 小于等于 |
+    *   `value`标记比较数据。
+*   返回值：
+    *   `box_list` 返回的查找到的数据块列表
+    *   `None` 没有找到相应的结果
