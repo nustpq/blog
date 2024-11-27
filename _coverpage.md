@@ -1,7 +1,7 @@
 
 # **Test Bench Online Docs**
 
-This is a help documents for Test Bench tools usage and release.
+This is the usage and release help documents for Test Bench related tools.
 
 ## [**👉 进入目录**](/README.md)
 
