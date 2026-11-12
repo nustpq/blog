@@ -1,0 +1,390 @@
+/* 设备状态看板 —— 亮/暗两套色都是单独选的步骤，不是自动反色。
+ * 色值与判定依据见文档 §配色；进度条轨道用同色系浅一档，状态色只用于
+ * 告警档（good 走中性蓝，避免整屏都是彩色）。
+ */
+:root {
+  color-scheme: light;
+  --surface-1: #fcfcfb;
+  --page: #f9f9f7;
+  --ink-1: #0b0b0b;
+  --ink-2: #52514e;
+  --ink-3: #898781;
+  --hairline: rgba(11, 11, 11, 0.10);
+  --rule: #e1e0d9;
+  --track: #e8eef7;
+  --accent: #2a78d6;
+  --warn: #fab219;
+  --crit: #d03b3b;
+  --good: #0ca30c;
+  --shadow: 0 1px 2px rgba(11, 11, 11, 0.06), 0 8px 24px rgba(11, 11, 11, 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --surface-1: #1a1a19;
+    --page: #0d0d0d;
+    --ink-1: #f0efec;
+    --ink-2: #c3c2b7;
+    --ink-3: #898781;
+    --hairline: rgba(255, 255, 255, 0.10);
+    --rule: #2c2c2a;
+    --track: #22304a;
+    --accent: #3987e5;
+    --warn: #fab219;
+    --crit: #d03b3b;
+    --good: #0ca30c;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface-1: #1a1a19;
+  --page: #0d0d0d;
+  --ink-1: #f0efec;
+  --ink-2: #c3c2b7;
+  --ink-3: #898781;
+  --hairline: rgba(255, 255, 255, 0.10);
+  --rule: #2c2c2a;
+  --track: #22304a;
+  --accent: #3987e5;
+  --warn: #fab219;
+  --crit: #d03b3b;
+  --good: #0ca30c;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink-1);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", "PingFang SC",
+        "Microsoft YaHei", sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+.page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 20px 16px calc(28px + env(safe-area-inset-bottom));
+}
+
+/* ------------------------------------------------------------- 页头 */
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.top h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.sub {
+  margin: 2px 0 0;
+  color: var(--ink-3);
+  font-size: 13px;
+}
+
+.icon-btn {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--hairline);
+  background: var(--surface-1);
+  color: var(--ink-2);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.icon-btn:active { transform: scale(0.96); }
+
+/* ------------------------------------------------------------- 连接状态 */
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  background: var(--surface-1);
+  color: var(--ink-2);
+  border: 1px solid var(--hairline);
+}
+
+/* 状态色永远配图标 + 文字，不靠颜色单独表意 */
+.status::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: none;
+  background: var(--ink-3);
+}
+
+.status-connected::before { background: var(--good); }
+.status-connecting::before,
+.status-reconnecting::before { background: var(--warn); }
+.status-fatal::before { background: var(--crit); }
+.status-reconnecting,
+.status-fatal { color: var(--ink-1); }
+
+/* ------------------------------------------------------------- 表单 */
+.add {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow);
+}
+
+.field { display: block; margin-bottom: 10px; }
+
+.field-label {
+  display: block;
+  font-size: 12px;
+  color: var(--ink-3);
+  margin-bottom: 4px;
+}
+
+.field input {
+  width: 100%;
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--ink-1);
+  background: var(--page);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  -webkit-appearance: none;
+}
+
+.field input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.add-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.btn {
+  flex: 1;
+  padding: 11px 14px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 15px;
+  color: #fff;
+  background: var(--accent);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn:active { transform: scale(0.99); }
+
+.btn.ghost {
+  flex: 0 0 auto;
+  color: var(--ink-2);
+  background: transparent;
+  border-color: var(--rule);
+  font-weight: 500;
+}
+
+.hint {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-3);
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.94em;
+  padding: 1px 4px;
+  border-radius: 4px;
+  background: var(--rule);
+  color: var(--ink-2);
+}
+
+/* ------------------------------------------------------------- 卡片 */
+.cards {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.card {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+/* 陈旧 / 无数据：整卡降低对比度。数值本身不隐藏 —— 用户需要看见
+ * 最后一次读数是多少，只是要知道它不可信。 */
+.card-stale,
+.card-empty { opacity: 0.72; }
+
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.card-title h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  word-break: break-word;
+}
+
+.card-prefix {
+  display: block;
+  margin-top: 2px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11.5px;
+  color: var(--ink-3);
+  word-break: break-all;
+}
+
+.card-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex: none;
+}
+
+.card-ip {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.card-fresh {
+  font-size: 12px;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.card-fresh.stale { color: var(--crit); font-weight: 600; }
+
+/* ------------------------------------------------------------- 指标行 */
+.rows { display: grid; gap: 9px; }
+
+.row {
+  display: grid;
+  grid-template-columns: 4.6em 1fr auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 22px;
+}
+
+.row-text { grid-template-columns: 4.6em 1fr; }
+
+.row-label {
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.row-value {
+  font-size: 14px;
+  color: var(--ink-1);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.row-value.warn { color: #8a5a00; }
+.row-value.crit { color: var(--crit); }
+
+:root[data-theme="dark"] .row-value.warn,
+:root:where(:not([data-theme="light"])) .row-value.warn { }
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) .row-value.warn { color: var(--warn); }
+}
+:root[data-theme="dark"] .row-value.warn { color: var(--warn); }
+
+/* 进度条：4px 圆头，轨道是同色系浅一档 —— 状态在整条上都能看出来 */
+.track {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--track);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--accent);
+  transition: width 0.4s ease-out;
+  min-width: 0;
+}
+
+.fill.warn { background: var(--warn); }
+.fill.crit { background: var(--crit); }
+
+.card-foot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+}
+
+.link {
+  background: none;
+  border: 0;
+  padding: 4px 2px;
+  font: inherit;
+  font-size: 13px;
+  color: var(--ink-3);
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
+}
+
+.link.danger:hover { color: var(--crit); }
+
+.empty-hint {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ink-3);
+  line-height: 1.6;
+  word-break: break-all;
+}
+
+.page-foot {
+  margin-top: 22px;
+  font-size: 12px;
+  color: var(--ink-3);
+  line-height: 1.6;
+}
+
+/* 降低动效偏好：进度条不做过渡 */
+@media (prefers-reduced-motion: reduce) {
+  .fill { transition: none; }
+  .icon-btn:active, .btn:active { transform: none; }
+}

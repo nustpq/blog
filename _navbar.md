@@ -10,6 +10,7 @@
   - [📍 DrawIO](https://app.diagrams.net/)
   - [📍 WaveDrom](https://wavedrom.com/editor.html)
   - [📍 PlantUML](https://plantuml.com/)
+  - [👉 状态监控](/mqttweb/)
 
 - 网站
   - [🗑️ Bitbucket](https://bitbucket.org/dashboard/repositories)

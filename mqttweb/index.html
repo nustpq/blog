@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>设备状态</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="page">
+
+  <header class="top">
+    <div class="top-title">
+      <h1>设备状态</h1>
+      <p class="sub">MQTT 只读看板</p>
+    </div>
+    <button id="theme" class="icon-btn" type="button" title="切换深浅色" aria-label="切换深浅色">
+      <span aria-hidden="true">◐</span>
+    </button>
+  </header>
+
+  <div id="status" class="status status-idle" role="status" aria-live="polite">未连接</div>
+
+  <form id="add-form" class="add">
+    <label class="field">
+      <span class="field-label">Broker（WebSocket 地址）</span>
+      <input id="broker-url" type="text" inputmode="url" spellcheck="false"
+             placeholder="wss://broker.emqx.io:8084/mqtt" autocomplete="off">
+    </label>
+    <label class="field">
+      <span class="field-label">MQTT 路径</span>
+      <input id="path-input" type="text" spellcheck="false" autocomplete="off"
+             placeholder="nustpq/nanopi">
+    </label>
+    <div class="add-actions">
+      <button type="submit" class="btn">添加设备</button>
+      <button id="reconnect" type="button" class="btn ghost">重新连接</button>
+    </div>
+    <p class="hint">
+      填到命名空间为止即可（例 <code>nustpq/nanopi</code>），会自动订阅
+      <code>/stat/#</code>。填成 <code>nustpq/nanopi/stat</code> 或完整 URL 也能认。
+    </p>
+  </form>
+
+  <div id="cards" class="cards"></div>
+
+  <footer class="page-foot">
+    <p>数据来自采集端每分钟一次的 retain 消息，<code>-1</code> 表示该指标读不到。</p>
+  </footer>
+</main>
+
+<script src="lib/mqtt311.js"></script>
+<script src="lib/fields.js"></script>
+<script src="lib/state.js"></script>
+<script src="lib/client.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

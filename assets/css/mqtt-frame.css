@@ -1,0 +1,24 @@
+/* docsify 里嵌 MQTT 看板用的 iframe 容器。
+ * 看板是独立 HTML 应用，必须隔离在 iframe 里 —— docsify 的
+ * table{display:block}、*{box-sizing:inherit} 等全局样式会破坏它的布局。 */
+
+.mqtt-frame-wrap {
+  margin: 1rem 0;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  border-radius: 14px;
+  overflow: hidden;
+  /* 手机上固定高度太矮，用视口单位下限；桌面端至少能看全三张卡 */
+  height: max(760px, 78vh);
+  background: #f9f9f7;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mqtt-frame-wrap { background: #0d0d0d; }
+}
+
+.mqtt-frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
